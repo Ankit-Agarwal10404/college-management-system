@@ -40,6 +40,7 @@ public class StudentController {
 
     }
 
+    
     @Operation(summary = "Get all student",
     		description = "Geting the detail of all Students")
     @GetMapping
