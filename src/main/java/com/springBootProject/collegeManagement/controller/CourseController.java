@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springBootProject.collegeManagement.dto.course.CourseRequestDTO;
+import com.springBootProject.collegeManagement.dto.course.CourseResponseDTO;
 import com.springBootProject.collegeManagement.entity.Course;
 import com.springBootProject.collegeManagement.entity.Student;
 import com.springBootProject.collegeManagement.service.CourseService;
@@ -19,6 +21,7 @@ import com.springBootProject.collegeManagement.service.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name = "Course Controllers", description = "CURD operations for Courses")
 
@@ -35,15 +38,15 @@ public class CourseController {
     		description = "create a new course for students")
 
 	@PostMapping
-	public Course saveCourse(@RequestBody Course course) {
-		return courseService.saveCourse(course);
+	public CourseResponseDTO saveCourse(@Valid @RequestBody CourseRequestDTO courseRequestDTO) {
+		return courseService.saveCourse(courseRequestDTO);
 	}
 	
 	@Operation(summary = "Get all Course",
     		description = "Getting All Course details")
 
 	@GetMapping
-    public List<Course> getAllStudents() {
+    public List<CourseResponseDTO> getAllStudents() {
 
         return courseService.getAllCourses();
 
@@ -53,7 +56,7 @@ public class CourseController {
     		description = "Getting Course details using Course Id")
 
 	 @GetMapping("/{id}")
-	 public Course getCourseById(@Parameter(description = "Course ID")
+	 public CourseResponseDTO getCourseById(@Parameter(description = "Course ID")
      										@PathVariable Long id) {
 		 return courseService.getCourseById(id);
 	 }
@@ -62,11 +65,11 @@ public class CourseController {
     		description = "Update Course details using Course Id and updated course details")
 
 	 @PutMapping("/{id}")
-	    public Course updateStudent(@Parameter(description = "Course ID")
+	    public CourseResponseDTO updateStudent(@Parameter(description = "Course ID")
 	    							@PathVariable Long id,
-	                                 @RequestBody Course course) {
+	                                 @Valid @RequestBody CourseRequestDTO courseRequestDTO) {
 
-	        return courseService.updateCourse(id, course);
+	        return courseService.updateCourse(id, courseRequestDTO);
 
 	    }
 	
@@ -86,11 +89,11 @@ public class CourseController {
 	@Operation(summary = "Assign Teacher to Course",
     		description = "API to assign the teacher to the course using Teacher ID and Course ID")
 	@PutMapping("/{courseId}/teacher/{teacherId}")
-	public ResponseEntity<Course> assignTeacher(
-			@Parameter(description = "Course ID")
-	        @PathVariable Long courseId,
-	        @Parameter(description = "Teacher ID")
-	        @PathVariable Long teacherId) {
+	public ResponseEntity<CourseResponseDTO> assignTeacher(
+												@Parameter(description = "Course ID")
+	        									@PathVariable Long courseId,
+	        									@Parameter(description = "Teacher ID")
+	        									@PathVariable Long teacherId) {
 
 	    return ResponseEntity.ok(courseService.assignTeacher(courseId, teacherId));
 	}
@@ -99,7 +102,7 @@ public class CourseController {
 	@Operation(summary = "Remove Teacher from course",
     		description = "API to remoce the Teacher from assigned course")
 	@DeleteMapping("/{courseId}/teacher")
-	public ResponseEntity<Course> removeTeacher(@PathVariable Long courseId) {
+	public ResponseEntity<CourseResponseDTO> removeTeacher(@PathVariable Long courseId) {
 
 	    return ResponseEntity.ok(courseService.removeTeacher(courseId));
 	}

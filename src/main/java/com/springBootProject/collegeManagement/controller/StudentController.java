@@ -90,7 +90,7 @@ public class StudentController {
     @Operation(summary = "Course Assign",
     		description = "Assigning the required course to student")
     @PostMapping("/{studentId}/courses/{courseId}")
-    public Student assignCourse(
+    public StudentResponseDTO assignCourse(
     		@Parameter(description = "Student ID")
             @PathVariable Long studentId,
             @Parameter(description = "Course ID")
@@ -103,7 +103,7 @@ public class StudentController {
     		description = "Removing the unrequired course for the student")
 
     @DeleteMapping("/{studentId}/courses/{courseId}")
-    public Student removeCourse(
+    public StudentResponseDTO removeCourse(
     		@Parameter(description = "Student ID")
             @PathVariable Long studentId,
             @Parameter(description = "Course ID")

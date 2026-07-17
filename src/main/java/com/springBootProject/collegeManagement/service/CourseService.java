@@ -1,23 +1,25 @@
 package com.springBootProject.collegeManagement.service;
 import java.util.List;
 
+import com.springBootProject.collegeManagement.dto.course.CourseRequestDTO;
+import com.springBootProject.collegeManagement.dto.course.CourseResponseDTO;
 import com.springBootProject.collegeManagement.entity.Course;
 
 public interface CourseService {
 
-    Course saveCourse(Course course);
+    CourseResponseDTO saveCourse(CourseRequestDTO courseRequestDTO);
 
-    List<Course> getAllCourses();
+    List<CourseResponseDTO> getAllCourses();
 
-    Course getCourseById(Long id);
+    CourseResponseDTO getCourseById(Long id);
 
-    Course updateCourse(Long id, Course course);
+    CourseResponseDTO updateCourse(Long id, CourseRequestDTO course);
 
     void deleteCourse(Long id);
     
-    public Course assignTeacher(Long courseId, Long teacherId);
-    public Course removeTeacher(Long courseId) ;
+    public CourseResponseDTO assignTeacher(Long courseId, Long teacherId);
+    public CourseResponseDTO removeTeacher(Long courseId) ;
     
-    public List<Course> getTeacherCourses(Long teacherId);
+    public List<CourseResponseDTO> getTeacherCourses(Long teacherId);
 
 }

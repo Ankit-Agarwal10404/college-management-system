@@ -1,0 +1,59 @@
+[33mcommit 23af4c976f50508061ecd58e81e759499f68a3af[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Ankit Agarwal <ankitagarwal.bkbiet25@gmail.com>
+Date:   Thu Jul 16 16:31:32 2026 +0530
+
+    added student DTO feature
+
+[33mcommit 36926c01d463e2753f75503cc7515b7fd6cd5c88[m
+Author: Ankit Agarwal <ankitagarwal.bkbiet25@gmail.com>
+Date:   Tue Jul 14 15:54:57 2026 +0530
+
+    Integrating Swagger Documentation for Teacher Module
+
+[33mcommit 7e64b44ebc61fd8b934f1d2cb06bec207550b6af[m
+Author: Ankit Agarwal <ankitagarwal.bkbiet25@gmail.com>
+Date:   Mon Jul 13 18:42:08 2026 +0530
+
+    Adding Course and Teacher relationsship
+
+[33mcommit 181bd2a4f9b16cc99953b65a7d11f880a7fc7d8e[m
+Author: Ankit Agarwal <ankitagarwal.bkbiet25@gmail.com>
+Date:   Sat Jul 11 16:45:51 2026 +0530
+
+    Adding Teacher APIs
+
+[33mcommit 3da4a8603380868ecfaf6b472cb1182e7307c3ed[m
+Author: Ankit Agarwal <ankitagarwal.bkbiet25@gmail.com>
+Date:   Wed Jul 8 20:20:28 2026 +0530
+
+    Integrating Swagger UI Documentation
+
+[33mcommit f205fb81fec3849a98aac31a28fb5810258827cc[m
+Author: Ankit Agarwal <ankitagarwal.bkbiet25@gmail.com>
+Date:   Tue Jul 7 20:01:45 2026 +0530
+
+    adding course to student relationship
+
+[33mcommit 444dfe4158fc612e036b9d36ee8069d31aa1aebb[m
+Author: Ankit Agarwal <ankitagarwal.bkbiet25@gmail.com>
+Date:   Sat Jul 4 20:57:39 2026 +0530
+
+    small modification
+
+[33mcommit 4049c3b3efd9514db72c7a09e4e0cc0086f9e0e8[m
+Author: Ankit Agarwal <ankitagarwal.bkbiet25@gmail.com>
+Date:   Fri Jul 3 19:36:28 2026 +0530
+
+    Course Api completed and tested using postman
+
+[33mcommit b1688cf5aea8fcb66bf662accf773e3721b0821f[m
+Author: Ankit Agarwal <ankitagarwal.bkbiet25@gmail.com>
+Date:   Thu Jul 2 15:57:32 2026 +0530
+
+    Started Adding Course API and Hibernate concepts
+
+[33mcommit 0ae7e2ad42ae857d8f613bfd0194797afc09c752[m
+Author: Ankit Agarwal <ankitagarwal.bkbiet25@gmail.com>
+Date:   Wed Jul 1 15:39:41 2026 +0530
+
+    student module completed

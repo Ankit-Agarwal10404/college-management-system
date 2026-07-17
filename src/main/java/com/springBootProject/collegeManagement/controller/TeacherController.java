@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springBootProject.collegeManagement.dto.course.CourseResponseDTO;
 import com.springBootProject.collegeManagement.dto.teacher.TeacherRequestDTO;
 import com.springBootProject.collegeManagement.dto.teacher.TeacherResponseDTO;
 import com.springBootProject.collegeManagement.entity.Course;
@@ -89,7 +90,7 @@ public class TeacherController {
     @Operation(summary = "Get Courses for Teacher",
     		description = "Used to get all the courses assigned to the teacher")
     @GetMapping("/teachers/{teacherId}/courses")
-	public ResponseEntity<List<Course>> getTeacherCourses(
+	public ResponseEntity<List<CourseResponseDTO>> getTeacherCourses(
 															@Parameter(description = "Teacher ID")
 	        												@PathVariable Long teacherId) {
 

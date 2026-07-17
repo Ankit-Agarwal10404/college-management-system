@@ -72,7 +72,7 @@ public class StudentServiceImp implements StudentService {
     }
 
 	@Override
-	public Student assignCourse(Long studentId, Long courseId) {
+	public StudentResponseDTO assignCourse(Long studentId, Long courseId) {
 		Student student = studentRepository.findById(studentId)
 				.orElseThrow(()-> new ResourceNotFoundException("student not found"));
 		
@@ -82,12 +82,13 @@ public class StudentServiceImp implements StudentService {
 		student.getCourses().add(course);
 		course.getStudents().add(student);	
 		
-		return studentRepository.save(student);
+		 Student savedStudent=studentRepository.save(student);
+		 return studentMapper.toDTO(savedStudent);
 	}
 
 
 	@Override
-	public Student removeCourse(Long studentId, Long courseId) {
+	public StudentResponseDTO removeCourse(Long studentId, Long courseId) {
 
 	    Student student = studentRepository.findById(studentId)
 	            .orElseThrow(() ->
@@ -100,7 +101,9 @@ public class StudentServiceImp implements StudentService {
 	    student.getCourses().remove(course);
 	    course.getStudents().remove(student);
 
-	    return studentRepository.save(student);
+	    Student savedStudent = studentRepository.save(student);
+	    
+	    return studentMapper.toDTO(savedStudent);
 	}
 
 }

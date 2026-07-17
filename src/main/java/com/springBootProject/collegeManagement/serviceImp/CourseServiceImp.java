@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.springBootProject.collegeManagement.dto.course.CourseRequestDTO;
+import com.springBootProject.collegeManagement.dto.course.CourseResponseDTO;
 import com.springBootProject.collegeManagement.entity.Course;
 import com.springBootProject.collegeManagement.entity.Teacher;
 import com.springBootProject.collegeManagement.exception.ResourceNotFoundException;
+import com.springBootProject.collegeManagement.mapper.CourseMapper;
 import com.springBootProject.collegeManagement.repository.CourseRepository;
 import com.springBootProject.collegeManagement.repository.TeacherRepository;
 import com.springBootProject.collegeManagement.service.CourseService;
@@ -16,36 +19,45 @@ public class CourseServiceImp implements CourseService{
 
 	private final CourseRepository courseRepository;
 	private final TeacherRepository teacherRepository;
+	private final CourseMapper courseMapper;
 	
-	public CourseServiceImp(CourseRepository courseRepository, TeacherRepository teacherRepository) {
+	public CourseServiceImp(CourseRepository courseRepository, TeacherRepository teacherRepository, CourseMapper courseMapper) {
 		// TODO Auto-generated constructor stub
+		this.courseMapper = courseMapper;
 		this.courseRepository=courseRepository;
 		this.teacherRepository=teacherRepository;
 	}
-	public Course saveCourse(Course course) {
-		return courseRepository.save(course);
+	public CourseResponseDTO saveCourse(CourseRequestDTO courseRequestDTO) {
+		Course course = courseMapper.toEntity(courseRequestDTO);
+		courseRepository.save(course);
+		return courseMapper.toDTO(course);
 	}
 
 	@Override
-	public List<Course> getAllCourses() {
-		return courseRepository.findAll();
+	public List<CourseResponseDTO> getAllCourses() {
+		List<Course> courses= courseRepository.findAll();
+		return courseMapper.toDTOList(courses);
 	}
 
 	@Override
-	public Course getCourseById(Long id) {
-		return courseRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("course not found"));
+	public CourseResponseDTO getCourseById(Long id) {
+		Course course= courseRepository.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException("course not found"));
+		return courseMapper.toDTO(course);
 	}
 
 	@Override
-	public Course updateCourse(Long id, Course course) {
-		Course c = courseRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("course not found"));
+	public CourseResponseDTO updateCourse(Long id, CourseRequestDTO courseRequestDTO) {
+		Course c = courseRepository.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException("course not found"));
 	
-			c.setCourseName(course.getCourseName());
-			c.setDuration(course.getDuration());
-			c.setCredits(course.getCredits());
-			c.setFees(course.getFees());
+			c.setCourseName(courseRequestDTO.getCourseName());
+			c.setDuration(courseRequestDTO.getDuration());
+			c.setCredits(courseRequestDTO.getCredits());
+			c.setFees(courseRequestDTO.getFees());
+			courseRepository.save(c);
 			
-			return courseRepository.save(c);
+			return courseMapper.toDTO(c);
 	}
 
 	@Override
@@ -55,7 +67,7 @@ public class CourseServiceImp implements CourseService{
 	}
 	
 	@Override
-	public Course assignTeacher(Long courseId, Long teacherId) {
+	public CourseResponseDTO assignTeacher(Long courseId, Long teacherId) {
 
 	    Course course = courseRepository.findById(courseId)
 	    		.orElseThrow(()-> new ResourceNotFoundException("course not found"));
@@ -65,25 +77,29 @@ public class CourseServiceImp implements CourseService{
 
 	    course.setTeacher(teacher);
 
-	    return courseRepository.save(course);
+	    Course savedCourse= courseRepository.save(course);
+	    
+	    return courseMapper.toDTO(savedCourse);
 	}
 
 	@Override
-	public Course removeTeacher(Long courseId) {
+	public CourseResponseDTO removeTeacher(Long courseId) {
 
 	    Course course = courseRepository.findById(courseId)
 	    		.orElseThrow(()-> new ResourceNotFoundException("course not found"));
 
 	    course.setTeacher(null);
 
-	    return courseRepository.save(course);
+	    Course savedCourse=courseRepository.save(course);
+	    
+	    return courseMapper.toDTO(savedCourse);
 	}
 	
 	@Override
-	public List<Course> getTeacherCourses(Long teacherId) {
+	public List<CourseResponseDTO> getTeacherCourses(Long teacherId) {
 
 	    Teacher teacher = teacherRepository.findById(teacherId)
 	    		.orElseThrow(()-> new ResourceNotFoundException("course not found"));
-	    return teacher.getCourses();
+	    return courseMapper.toDTOList(teacher.getCourses());
 	}
 }

@@ -19,9 +19,9 @@ public interface StudentService {
 
 	    void deleteStudent(Long id);
 	    
-	    Student assignCourse(Long studentId, Long courseId);
+	    StudentResponseDTO assignCourse(Long studentId, Long courseId);
 	    
-	    Student removeCourse(Long studentId, Long courseId);
+	    StudentResponseDTO removeCourse(Long studentId, Long courseId);
 
 
 }
